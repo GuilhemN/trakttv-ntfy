@@ -1,0 +1,8 @@
+services:
+  scheduler:
+    build: .
+    environment:
+      TRAKT_TOKENFILE: /tokencache/t_token
+    env_file: .env
+    volumes:
+      - ./tokencache:/tokencache
