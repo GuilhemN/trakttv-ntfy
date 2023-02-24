@@ -1,7 +1,7 @@
 FROM alpine:3.15
 
 # Install required packages
-RUN apk add --update --no-cache bash
+RUN apk add --update --no-cache bash busybox-suid
 
 # Install python/pip
 RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
@@ -16,6 +16,8 @@ WORKDIR /usr/scheduler
 COPY notify.py .
 COPY crontab .
 COPY start.sh .
+
+RUN chmod 0644 ./crontab
 
 # create cron.log file
 RUN touch /var/log/cron.log
